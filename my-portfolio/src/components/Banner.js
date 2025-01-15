@@ -57,10 +57,25 @@ export const Banner = () => {
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                 <span className="tagline">Welcome to my Portfolio</span>
                 <h1>{`Hi! I'm Muhammad Talha`} <span className="txt-rotate" dataPeriod="1000" data-rotate='["Game Developer"]'><span className="wrap">{text}</span></span></h1>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and 
-                    scrambled it to make a type specimen book.</p>
-                  {/*<button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>*/}
+                <p>I am a passionate Game Developer with over three years of experience creating immersive gaming
+                  experiences.
+                  Skilled in the latest technologies, I specialize in multiplayer game development, addressing backlog
+                  issues,
+                  and building robust feature architectures to enhance gameplay. Proficient in various programming
+                  languages,
+                  I prioritize writing clean, reusable, and well-documented code to ensure high-quality game
+                  performance.
+                  <br/><br/>
+                  My expertise includes optimizing game engines, debugging complex issues, and refining game
+                  architecture to
+                  boost productivity and deliver seamless gameplay. With a strong eye for detail and a solid
+                  understanding of
+                  gaming trends, I excel in collaborative environments where creativity thrives. I’m eager to contribute
+                  to
+                  exciting projects and continuously learn and adapt within the gaming industry. Let’s connect and bring
+                  innovative
+                  gaming ideas to life!</p>
+                {/*<button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>*/}
               </div>}
             </TrackVisibility>
           </Col>
