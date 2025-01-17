@@ -3,21 +3,3 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
-
-# Node.js cache
-/node_modules/
-*.log
-
-# React build cache
-/build/
-
-# VS Code workspace cache
-.vscode/
-
-# OS-specific cache
-.DS_Store
-Thumbs.db
-
-# npm and Yarn caches
-.npm/
-.yarn/
