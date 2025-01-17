@@ -154,12 +154,15 @@ span.navbar-text {
     font-weight: 700;
     color: #fff;
     border: 1px solid #fff;
-    padding: 18px 34px;
+    padding: 10px 34px;
     font-size: 18px;
     margin-left: 18px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     position: relative;
     background-color: transparent;
     transition: 0.3s ease-in-out;
+    border-radius: 5px;
 }
 .navbar-text button span {
     z-index: 1;
@@ -435,6 +438,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     overflow: hidden;
     margin-bottom: 24px;
     cursor: pointer;
+    max-height: 197px;
 }
 .proj-imgbx::before {
     content: "";
