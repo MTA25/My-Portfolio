@@ -637,6 +637,11 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     letter-spacing: 0.5px;
     margin-top: 20px;
 }
+.footer-title {
+    font-size: 3rem;
+    margin-top: 20px;
+    font-weight: bold;
+  }
 
 /* Popup Overlay */
 .popup-overlay {
