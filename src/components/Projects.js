@@ -8,9 +8,13 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from '@mui/icons-material/Close';
-import { styled } from '@mui/material/styles';
-import Carousel from 'react-bootstrap/Carousel';
+import CloseIcon from "@mui/icons-material/Close";
+import { styled } from "@mui/material/styles";
+import Carousel from "react-bootstrap/Carousel";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid2";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+
 //UML diagrams
 import bugSquasherMinigameUML from "../assets/documentImages/Bug Squasher Minigame Enhanced.png";
 import buildSafeComputerMinigameUML from "../assets/documentImages/Build Safe Computer.png";
@@ -76,13 +80,28 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 export const Projects = () => {
   const [open, setOpen] = React.useState(false);
   const [currentProjectImages, setCurrentProjectImages] = React.useState([]);
-  const handleOpen = (images) => {
+  const [currentProjectTitle, setCurrentProjectTitle] = React.useState("");
+  const [currentProjectDescription, setCurrentProjectDescription] =
+    React.useState("");
+  const handleOpen = (images, title, description) => {
+    setCurrentProjectDescription(description);
+    setCurrentProjectTitle(title);
     setCurrentProjectImages(images);
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+    setCurrentProjectDescription("");
+    setCurrentProjectTitle("");
     setCurrentProjectImages([]);
+  };
+
+  // carousel navigation icon
+  const gradientStyle = {
+    color: "white",
+    fontSize: "2rem",
+    filter:
+      "drop-shadow(2px 2px 10px #aa367c) drop-shadow(-2px -2px 10px #4a2fbd)",
   };
 
   const projects = [
@@ -90,44 +109,51 @@ export const Projects = () => {
       title: "Azure Dungeon Survivor (Computer Game)",
       description: "",
       imgUrl: Azure5,
-      images: [Azure4, Azure3, Azure1]
+      images: [Azure4, Azure3, Azure1],
     },
     {
       title: "Top Burger (Mobile Game)",
       description: "",
       imgUrl: burgermaking3,
-      images: [burgermaking1, burgermaking2, burgermaking4, burgermaking5]
+      images: [burgermaking1, burgermaking2, burgermaking4, burgermaking5],
     },
     {
       title: "Funny Shooter 2 (WebGL Game)",
       description: "",
       imgUrl: funnyShooter1,
-      images: [funnyShooter2, funnyShooter3, funnyShooter4]
+      images: [funnyShooter2, funnyShooter3, funnyShooter4],
     },
     {
       title: "3D Car Parking (Mobile Game)",
       description: "",
       imgUrl: carparking1,
-      images: [carparking2, carparking3, carparking4, carparking5]
+      images: [carparking2, carparking3, carparking4, carparking5],
     },
     {
       title: "Toon Car Parking 3D (Mobile Game)",
       description: "",
       imgUrl: drcarparking1,
-      images: [drcarparking2, drcarparking3, drcarparking4]
+      images: [drcarparking2, drcarparking3, drcarparking4],
     },
     {
       title: "FPS Shooter (Mobile Game)",
       description: "",
       imgUrl: fpsShooter1,
-      images: [fpsShooter2, fpsShooter3, fpsShooter4, fpsShooter5]
+      images: [fpsShooter2, fpsShooter3, fpsShooter4, fpsShooter5],
     },
     {
       title: "Cowboy Shooting (Mobile Game)",
       description: "",
       imgUrl: cowboyShootingcover,
-      images: [CowboyShooting1, CowboyShooting2, CowboyShooting3, CowboyShooting4, CowboyShooting5, CowboyShooting6]
-    }
+      images: [
+        CowboyShooting1,
+        CowboyShooting2,
+        CowboyShooting3,
+        CowboyShooting4,
+        CowboyShooting5,
+        CowboyShooting6,
+      ],
+    },
   ];
 
   const documents = [
@@ -216,10 +242,18 @@ export const Projects = () => {
           aria-labelledby="customized-dialog-title"
           open={open}
           scroll="paper"
-          maxWidth="md"
+          maxWidth="lg"
+          fullWidth="md"
+          style={{ zIndex: "100000" }}
+          sx={{
+            "& .MuiPaper-root": {
+              backgroundColor: "#1f1d1d",
+              color: "#fff",
+            },
+          }}
         >
           <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-            Preview
+            {currentProjectTitle}
           </DialogTitle>
           <IconButton
             aria-label="close"
@@ -233,19 +267,43 @@ export const Projects = () => {
           >
             <CloseIcon />
           </IconButton>
-          <DialogContent>
-            <Carousel>
-              {currentProjectImages.map((image, index) => (
-                <Carousel.Item className={index === 0 ? "active" : ""} key={index}>
+          <DialogContent style={{ borderTop: "1px solid white" }}>
+            <Grid container spacing={2}>
+              <Grid size={{ xs: 12, md: 5 }}>
+                <Typography variant="h5" gutterBottom>
+                  Project Detail
+                </Typography>
+                <Typography id="alert-dialog-description">
+                  {currentProjectDescription}
+                </Typography>
+              </Grid>
+              <Grid size={{ xs: 12, md: 7 }}>
+                {currentProjectImages.length > 1 ? (
+                  <Carousel
+                    prevIcon={<FaArrowLeft style={gradientStyle} />}
+                    nextIcon={<FaArrowRight style={gradientStyle} />}
+                  >
+                    {currentProjectImages.map((image, index) => (
+                      <Carousel.Item key={index}>
+                        <img
+                          src={image}
+                          className="d-block w-100 carousel-img"
+                          alt={`Slide ${index + 1}`}
+                          
+                        />
+                      </Carousel.Item>
+                    ))}
+                  </Carousel>
+                ) : (
                   <img
-                    src={image}
-                    className="d-block w-100"
-                    alt={`Slide ${index + 1}`}
-                    style={{ maxHeight: '450px', objectFit: 'cover', width: 'auto' }}
+                    src={currentProjectImages[0]}
+                    className="d-block w-100 carousel-img"
+                    alt={`Slide 1`}
+                    
                   />
-                </Carousel.Item>
-              ))}
-            </Carousel>
+                )}
+              </Grid>
+            </Grid>
           </DialogContent>
         </BootstrapDialog>
       </div>
@@ -306,7 +364,13 @@ export const Projects = () => {
                               <ProjectCard
                                 key={index}
                                 {...project}
-                                onClick={() => handleOpen(project.images)}
+                                onClick={() =>
+                                  handleOpen(
+                                    project.images,
+                                    project.title,
+                                    project.description
+                                  )
+                                }
                               />
                             ))}
                           </Row>
@@ -318,7 +382,13 @@ export const Projects = () => {
                                 <ProjectCard
                                   key={index}
                                   {...documents}
-                                  onClick={() => handleOpen(documents.imgUrl)}
+                                  onClick={() =>
+                                    handleOpen(
+                                      documents.imgUrl,
+                                      documents.title,
+                                      documents.description
+                                    )
+                                  }
                                 />
                               );
                             })}
