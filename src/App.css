@@ -486,6 +486,19 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     right: 0;
     z-index: -4;
 }
+.carousel-img{
+    height: 500px;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+    background-color: #000;
+}
+
+@media (max-width:500px) {
+    .carousel-img{
+        height: 200px;
+    }
+}
 
 /************ Contact Css ************/
 .contact {
@@ -638,8 +651,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     margin-top: 20px;
 }
 .footer-title {
-    font-size: 3rem;
-    margin-top: 20px;
+    font-size: clamp(1.5rem, 2.5vw ,3rem);
     font-weight: bold;
   }
 

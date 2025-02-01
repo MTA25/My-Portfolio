@@ -13,7 +13,7 @@ export const Footer = () => {
           {/*<MailchimpForm />*/}
           <Col size={12} sm={6}>
             {/*<img src={logo} alt="Logo" />*/}
-            <h2 class="footer-title">Muhammad Talha</h2>
+            <h2 className="text-center text-sm-start footer-title">Muhammad Talha</h2>
           </Col>
           <Col size={12} sm={6} className="text-center text-sm-end">
             <div className="social-icon">

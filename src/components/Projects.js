@@ -104,15 +104,6 @@ export const Projects = () => {
       "drop-shadow(2px 2px 10px #aa367c) drop-shadow(-2px -2px 10px #4a2fbd)",
   };
 
-  // carousel image style
-  const imageStyle = {
-    height: "500px",
-    width: "100%",
-    objectFit: "contain",
-    borderRadius: "5px",
-    backgroundColor: "#000",
-  };
-
   const projects = [
     {
       title: "Azure Dungeon Survivor (Computer Game)",
@@ -278,7 +269,7 @@ export const Projects = () => {
           </IconButton>
           <DialogContent style={{ borderTop: "1px solid white" }}>
             <Grid container spacing={2}>
-              <Grid size={5}>
+              <Grid size={{ xs: 12, md: 5 }}>
                 <Typography variant="h5" gutterBottom>
                   Project Detail
                 </Typography>
@@ -286,7 +277,7 @@ export const Projects = () => {
                   {currentProjectDescription}
                 </Typography>
               </Grid>
-              <Grid size={7}>
+              <Grid size={{ xs: 12, md: 7 }}>
                 {currentProjectImages.length > 1 ? (
                   <Carousel
                     prevIcon={<FaArrowLeft style={gradientStyle} />}
@@ -296,9 +287,9 @@ export const Projects = () => {
                       <Carousel.Item key={index}>
                         <img
                           src={image}
-                          className="d-block w-100"
+                          className="d-block w-100 carousel-img"
                           alt={`Slide ${index + 1}`}
-                          style={imageStyle}
+                          
                         />
                       </Carousel.Item>
                     ))}
@@ -306,9 +297,9 @@ export const Projects = () => {
                 ) : (
                   <img
                     src={currentProjectImages[0]}
-                    className="d-block w-100"
+                    className="d-block w-100 carousel-img"
                     alt={`Slide 1`}
-                    style={imageStyle}
+                    
                   />
                 )}
               </Grid>
