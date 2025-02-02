@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/My-Portfolio/static/css/main.be1b5bb8.css",
-    "main.js": "/My-Portfolio/static/js/main.62a1836a.js",
+    "main.css": "/My-Portfolio/static/css/main.82fe6ace.css",
+    "main.js": "/My-Portfolio/static/js/main.7243db34.js",
     "static/js/488.f9972b8f.chunk.js": "/My-Portfolio/static/js/488.f9972b8f.chunk.js",
+    "static/media/DontTouch-video.mp4": "/My-Portfolio/static/media/DontTouch-video.97865a4f8e5d8728f97d.mp4",
     "static/media/Azure2.png": "/My-Portfolio/static/media/Azure2.cd2e5774b03d4a9b0fa8.png",
     "static/media/CowboyShooting4.png": "/My-Portfolio/static/media/CowboyShooting4.d27f7ec8430831a37200.png",
     "static/media/CowboyShooting1.png": "/My-Portfolio/static/media/CowboyShooting1.b7895c3850c7eb72050f.png",
@@ -27,6 +28,7 @@
     "static/media/FSM UML.png": "/My-Portfolio/static/media/FSM UML.9f5966eee94d2cc81af5.png",
     "static/media/burgermaking4.png": "/My-Portfolio/static/media/burgermaking4.b0eba68b0de234e5271f.png",
     "static/media/burgermaking1.png": "/My-Portfolio/static/media/burgermaking1.7ed918cc3e2e7205b3ca.png",
+    "static/media/banner-bg1.jpg": "/My-Portfolio/static/media/banner-bg1.85ebb68b4f4a480fb4c0.jpg",
     "static/media/funnyShooter4.png": "/My-Portfolio/static/media/funnyShooter4.4d843a9036be4aacce78.png",
     "static/media/Haywire Robot UML.png": "/My-Portfolio/static/media/Haywire Robot UML.a345fbbab859f4a67de9.png",
     "static/media/funnyShooter3.png": "/My-Portfolio/static/media/funnyShooter3.a3f3f4e2b28b84e21aa2.png",
@@ -42,12 +44,10 @@
     "static/media/CowboyShooting2.jpeg": "/My-Portfolio/static/media/CowboyShooting2.d784f9089e3f97d71fd0.jpeg",
     "static/media/drcarparking3.jpg": "/My-Portfolio/static/media/drcarparking3.f0ba0d9d220376fafadf.jpg",
     "static/media/fpsShooter4.jpg": "/My-Portfolio/static/media/fpsShooter4.8bd5fcfd6e7ea895be67.jpg",
-    "static/media/banner-bg.png": "/My-Portfolio/static/media/banner-bg.cc1273af450504afe755.png",
     "static/media/Missions Handler.png": "/My-Portfolio/static/media/Missions Handler.f28a413e5e45e8c5ee05.png",
     "static/media/Build Safe Computer.png": "/My-Portfolio/static/media/Build Safe Computer.177749047680dd512e45.png",
     "static/media/funnyShooter2.png": "/My-Portfolio/static/media/funnyShooter2.17c38a860b992e686e64.png",
     "static/media/fpsShooter1.jpg": "/My-Portfolio/static/media/fpsShooter1.738b2edec716b3bde648.jpg",
-    "static/media/header-img.svg": "/My-Portfolio/static/media/header-img.84bf93eb20488a753440bf83d27db7bb.svg",
     "static/media/fpsShooter3.jpg": "/My-Portfolio/static/media/fpsShooter3.6d5f4614d70315ea9bfe.jpg",
     "static/media/shootingsystem.png": "/My-Portfolio/static/media/shootingsystem.adde221d291390d49988.png",
     "static/media/fpsShooter0.jpg": "/My-Portfolio/static/media/fpsShooter0.19155325614191465a08.jpg",
@@ -57,6 +57,7 @@
     "static/media/CentraNo2-Bold.ttf": "/My-Portfolio/static/media/CentraNo2-Bold.2faff7f7d3fc92a2fcd9.ttf",
     "static/media/CentraNo2-Medium.ttf": "/My-Portfolio/static/media/CentraNo2-Medium.f94be5b326d78bb32b95.ttf",
     "static/media/CentraNo2-Book.ttf": "/My-Portfolio/static/media/CentraNo2-Book.2b143fa4b734a3584043.ttf",
+    "static/media/MuhammadTalhaResume.pdf": "/My-Portfolio/static/media/MuhammadTalhaResume.689dbbc45dfd3cf9cf1d.pdf",
     "static/media/footer-bg.png": "/My-Portfolio/static/media/footer-bg.7bd67c0f73571d0acc02.png",
     "static/media/SaveLoadData UML.png": "/My-Portfolio/static/media/SaveLoadData UML.b4fd8f1fc1d5a596d3d8.png",
     "static/media/Camera System UML.png": "/My-Portfolio/static/media/Camera System UML.d0bb2b6c800648c5c43e.png",
@@ -64,18 +65,20 @@
     "static/media/SaveLoadData DFD.png": "/My-Portfolio/static/media/SaveLoadData DFD.d8f00197b20a2d55b221.png",
     "static/media/revicons.eot": "/My-Portfolio/static/media/revicons.a77de540a38981833f9e.eot",
     "static/media/revicons.ttf": "/My-Portfolio/static/media/revicons.57fd05d4ae650374c8de.ttf",
+    "static/media/controller.svg": "/My-Portfolio/static/media/controller.f0da7a48c7435c45c20d8663e8e79744.svg",
     "static/media/revicons.woff": "/My-Portfolio/static/media/revicons.e8746a624ed098489406.woff",
     "static/media/logo.svg": "/My-Portfolio/static/media/logo.eaf3c0bc058e0ed6471ba20dc0af6da2.svg",
     "static/media/nav-icon3.svg": "/My-Portfolio/static/media/nav-icon3.08b285abb8e118b52637efa5d65c5367.svg",
+    "static/media/nav-icon4.svg": "/My-Portfolio/static/media/nav-icon4.4d7eaf1f49979c956f97217845d275e7.svg",
     "index.html": "/My-Portfolio/index.html",
     "static/media/nav-icon1.svg": "/My-Portfolio/static/media/nav-icon1.721d5414c26365f117e71d46b6641cb2.svg",
     "static/media/nav-icon2.svg": "/My-Portfolio/static/media/nav-icon2.178f497aa17b70c42df2a1a8c926ed01.svg",
-    "main.be1b5bb8.css.map": "/My-Portfolio/static/css/main.be1b5bb8.css.map",
-    "main.62a1836a.js.map": "/My-Portfolio/static/js/main.62a1836a.js.map",
+    "main.82fe6ace.css.map": "/My-Portfolio/static/css/main.82fe6ace.css.map",
+    "main.7243db34.js.map": "/My-Portfolio/static/js/main.7243db34.js.map",
     "488.f9972b8f.chunk.js.map": "/My-Portfolio/static/js/488.f9972b8f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.be1b5bb8.css",
-    "static/js/main.62a1836a.js"
+    "static/css/main.82fe6ace.css",
+    "static/js/main.7243db34.js"
   ]
 }
