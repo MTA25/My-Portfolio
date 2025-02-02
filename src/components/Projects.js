@@ -3,7 +3,7 @@ import { ProjectCard } from "./ProjectCard";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
-import * as React from "react";
+import React, { useState, useRef } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -30,6 +30,9 @@ import missionsHandlerUML from "../assets/documentImages/Missions Handler.png";
 import shootingsystemUML from "../assets/documentImages/shootingsystem.png";
 import saveLoadDataUML from "../assets/documentImages/SaveLoadData UML.png";
 import saveLoadDataDFD from "../assets/documentImages/SaveLoadData DFD.png";
+
+//Project Video
+import vidoe1 from "../assets/video/video1.mp4";
 
 //Project Images
 import Azure1 from "../assets/projectImages/Azure1.png";
@@ -99,13 +102,36 @@ export const Projects = () => {
     setCurrentProjectLink("");
   };
 
-  // carousel navigation icon
   const gradientStyle = {
     color: "white",
     fontSize: "2rem",
     filter:
       "drop-shadow(2px 2px 10px #aa367c) drop-shadow(-2px -2px 10px #4a2fbd)",
   };
+
+  const [showImages, setShowImages] = useState(true);
+  const [images, setImages] = useState([]);
+  const [videos, setVideos] = useState([]);
+
+  const separateImagesAndVideos = () => {
+    const tempImages = [];
+    const tempVideos = [];
+
+    currentProjectImages.forEach((media) => {
+      if (typeof media === "string" && media.includes(".mp4")) {
+        tempVideos.push(media);
+      } else {
+        tempImages.push(media);
+      }
+    });
+
+    setImages(tempImages);
+    setVideos(tempVideos);
+  };
+
+  React.useEffect(() => {
+    separateImagesAndVideos();
+  }, [currentProjectImages]);
 
   const projects = [
     {
@@ -125,7 +151,7 @@ export const Projects = () => {
         burgermaking2,
         burgermaking4,
         burgermaking5,
-        "https://assets.codepen.io/6093409/river.mp4",
+        vidoe1,
       ],
     },
     {
@@ -304,60 +330,91 @@ export const Projects = () => {
                 )}
               </Grid>
               <Grid size={{ xs: 12, md: 7 }}>
-                {currentProjectImages.length > 1 ? (
-                  <Carousel
-                    prevIcon={<FaArrowLeft style={gradientStyle} />}
-                    nextIcon={<FaArrowRight style={gradientStyle} />}
-                  >
-                    {currentProjectImages.map((media, index) => (
-                      <Carousel.Item key={index}>
-                        {typeof media === "string" && media.includes(".mp4") ? (
-                          <video
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            controls
-                            className="d-block w-100 carousel-img"
-                            poster={currentProjectImages[0]}
-                          >
-                            <source src={media} type="video/mp4" /> Your browser
-                            does not support the video tag.
-                          </video>
-                        ) : media ? (
-                          <img
-                            src={media}
-                            className="d-block w-100 carousel-img"
-                            alt={`Slide ${index + 1}`}
-                          />
-                        ) : (
-                          <p>Error loading media</p>
-                        )}
-                      </Carousel.Item>
-                    ))}
-                  </Carousel>
-                ) : currentProjectImages[0] &&
-                  typeof currentProjectImages[0] === "string" &&
-                  currentProjectImages[0].includes(".mp4") ? (
+                {images.length > 0 || videos.length > 0 ? (
+                  <div>
+                    {images.length > 1 && (
+                      <button
+                        onClick={() => setShowImages(true)}
+                        className="text-white me-4"
+                      >
+                        Show Images
+                      </button>
+                    )}
+
+                    {videos.length > 0 && (
+                      <button
+                        onClick={() => setShowImages(false)}
+                        className="text-white"
+                      >
+                        Show Videos
+                      </button>
+                    )}
+                  </div>
+                ) : null}
+
+                {images.length === 1 && videos.length === 0 ? (
+                  <img
+                    src={images[0]}
+                    className="d-block w-100 carousel-img"
+                    alt="Project img"
+                  />
+                ) : null}
+
+                {videos.length === 1 && images.length === 0 ? (
                   <video
                     autoPlay
                     loop
                     muted
                     playsInline
-                    className="d-block w-100 carousel-video"
+                    controls
+                    className="d-block w-100 carousel-img"
                     poster="https://via.placeholder.com/800x450"
                   >
-                    <source src={currentProjectImages[0]} type="video/mp4" />
+                    <source src={videos[0]} type="video/mp4" />
+                    Your browser does not support the video tag.
                   </video>
-                ) : (
-                  currentProjectImages[0] && (
-                    <img
-                      src={currentProjectImages[0]}
-                      className="d-block w-100 carousel-img"
-                      alt="Slide 1"
-                    />
-                  )
-                )}
+                ) : null}
+
+                {showImages && images.length > 1 ? (
+                  <Carousel
+                    prevIcon={<FaArrowLeft style={gradientStyle} />}
+                    nextIcon={<FaArrowRight style={gradientStyle} />}
+                  >
+                    {images.map((media, index) => (
+                      <Carousel.Item key={index}>
+                        <img
+                          src={media}
+                          className="d-block w-100 carousel-img"
+                          alt={`Slide ${index + 1}`}
+                        />
+                      </Carousel.Item>
+                    ))}
+                  </Carousel>
+                ) : null}
+
+                {!showImages && videos.length > 0 ? (
+                  <Carousel
+                    prevIcon={<FaArrowLeft style={gradientStyle} />}
+                    nextIcon={<FaArrowRight style={gradientStyle} />}
+                  >
+                    {videos.map((media, index) => (
+                      <Carousel.Item key={index}>
+                        <video
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          controls
+                          className="d-block w-100 carousel-img"
+                          poster="https://via.placeholder.com/800x450"
+                        >
+                          <source src={media} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                      </Carousel.Item>
+                    ))}
+                  </Carousel>
+                ) : null}
               </Grid>
             </Grid>
           </DialogContent>
@@ -425,7 +482,7 @@ export const Projects = () => {
                                     project.images,
                                     project.title,
                                     project.description,
-                                    project.link,
+                                    project.link
                                   )
                                 }
                               />
