@@ -5,7 +5,7 @@ import navIcon1 from '../assets/img/nav-icon1.svg';
 import navIcon2 from '../assets/img/nav-icon2.svg';
 import navIcon3 from '../assets/img/nav-icon3.svg';
 import navIcon4 from "../assets/img/nav-icon4.svg";
-import Resume from "../assets/resume.pdf";
+import Resume from "../assets/MuhammadTalhaResume.pdf";
 import { HashLink } from 'react-router-hash-link';
 import {
   BrowserRouter as Router
@@ -36,8 +36,8 @@ export const NavBar = () => {
 
     const handleDownload = () => {
       const link = document.createElement('a');
-      link.href = Resume; // Provide the correct file path or URL
-      link.download = 'resume.pdf'; // The file will be downloaded as 'resume.pdf'
+      link.href = Resume;
+      link.download = 'TalhaResume.pdf';
       link.click();
     };
 
