@@ -5,6 +5,7 @@ import navIcon1 from '../assets/img/nav-icon1.svg';
 import navIcon2 from '../assets/img/nav-icon2.svg';
 import navIcon3 from '../assets/img/nav-icon3.svg';
 import navIcon4 from "../assets/img/nav-icon4.svg";
+import Resume from "../assets/resume.pdf";
 import { HashLink } from 'react-router-hash-link';
 import {
   BrowserRouter as Router
@@ -33,6 +34,13 @@ export const NavBar = () => {
     setActiveLink(value);
   }
 
+    const handleDownload = () => {
+      const link = document.createElement('a');
+      link.href = Resume; // Provide the correct file path or URL
+      link.download = 'resume.pdf'; // The file will be downloaded as 'resume.pdf'
+      link.click();
+    };
+
   return (
     <Router>
       <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
@@ -58,7 +66,7 @@ export const NavBar = () => {
                 {/*<a href="#"><img src={navIcon3} alt="" /></a>*/}
               </div>
               <HashLink to='#projects'>
-                <button className="vvd"><span>Resume</span></button>
+                <button className="vvd" onClick={handleDownload}><span>Resume</span></button>
               </HashLink>
             </span>
           </Navbar.Collapse>
