@@ -115,7 +115,7 @@ export const Projects = () => {
       title: "Top Burger (Mobile Game)",
       description: "",
       imgUrl: burgermaking3,
-      images: [burgermaking1, burgermaking2, burgermaking4, burgermaking5],
+      images: [burgermaking1, burgermaking2, burgermaking4, burgermaking5,"https://assets.codepen.io/6093409/river.mp4"],
     },
     {
       title: "Funny Shooter 2 (WebGL Game)",
@@ -242,8 +242,8 @@ export const Projects = () => {
           aria-labelledby="customized-dialog-title"
           open={open}
           scroll="paper"
+          fullWidth={true}
           maxWidth="lg"
-          fullWidth="md"
           style={{ zIndex: "100000" }}
           sx={{
             "& .MuiPaper-root": {
@@ -283,24 +283,54 @@ export const Projects = () => {
                     prevIcon={<FaArrowLeft style={gradientStyle} />}
                     nextIcon={<FaArrowRight style={gradientStyle} />}
                   >
-                    {currentProjectImages.map((image, index) => (
+                    {currentProjectImages.map((media, index) => (
                       <Carousel.Item key={index}>
-                        <img
-                          src={image}
-                          className="d-block w-100 carousel-img"
-                          alt={`Slide ${index + 1}`}
-                          
-                        />
+                        {typeof media === "string" && media.includes(".mp4") ? (
+                          <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            controls
+                            className="d-block w-100 carousel-img"
+                            poster={currentProjectImages[0]}
+                          >
+                            <source src={media} type="video/mp4" /> Your browser
+                            does not support the video tag.
+                          </video>
+                        ) : media ? (
+                          <img
+                            src={media}
+                            className="d-block w-100 carousel-img"
+                            alt={`Slide ${index + 1}`}
+                          />
+                        ) : (
+                          <p>Error loading media</p>
+                        )}
                       </Carousel.Item>
                     ))}
                   </Carousel>
+                ) : currentProjectImages[0] &&
+                  typeof currentProjectImages[0] === "string" &&
+                  currentProjectImages[0].includes(".mp4") ? (
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="d-block w-100 carousel-video"
+                    poster="https://via.placeholder.com/800x450"
+                  >
+                    <source src={currentProjectImages[0]} type="video/mp4" />
+                  </video>
                 ) : (
-                  <img
-                    src={currentProjectImages[0]}
-                    className="d-block w-100 carousel-img"
-                    alt={`Slide 1`}
-                    
-                  />
+                  currentProjectImages[0] && (
+                    <img
+                      src={currentProjectImages[0]}
+                      className="d-block w-100 carousel-img"
+                      alt="Slide 1"
+                    />
+                  )
                 )}
               </Grid>
             </Grid>
@@ -377,16 +407,16 @@ export const Projects = () => {
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
                           <Row>
-                            {documents.map((documents, index) => {
+                            {documents.map((document, index) => {
                               return (
                                 <ProjectCard
                                   key={index}
-                                  {...documents}
+                                  {...document}
                                   onClick={() =>
                                     handleOpen(
-                                      documents.imgUrl,
-                                      documents.title,
-                                      documents.description
+                                      document.imgUrl,
+                                      document.title,
+                                      document.description
                                     )
                                   }
                                 />
