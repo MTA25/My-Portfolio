@@ -81,19 +81,22 @@ export const Projects = () => {
   const [open, setOpen] = React.useState(false);
   const [currentProjectImages, setCurrentProjectImages] = React.useState([]);
   const [currentProjectTitle, setCurrentProjectTitle] = React.useState("");
+  const [currentProjectLink, setCurrentProjectLink] = React.useState("");
   const [currentProjectDescription, setCurrentProjectDescription] =
     React.useState("");
-  const handleOpen = (images, title, description) => {
-    setCurrentProjectDescription(description);
-    setCurrentProjectTitle(title);
+  const handleOpen = (images, title, description, link) => {
     setCurrentProjectImages(images);
+    setCurrentProjectTitle(title);
+    setCurrentProjectDescription(description);
+    setCurrentProjectLink(link);
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
-    setCurrentProjectDescription("");
-    setCurrentProjectTitle("");
     setCurrentProjectImages([]);
+    setCurrentProjectTitle("");
+    setCurrentProjectDescription("");
+    setCurrentProjectLink("");
   };
 
   // carousel navigation icon
@@ -108,42 +111,55 @@ export const Projects = () => {
     {
       title: "Azure Dungeon Survivor (Computer Game)",
       description: "",
+      link: "https://github.com/",
       imgUrl: Azure5,
       images: [Azure4, Azure3, Azure1],
     },
     {
       title: "Top Burger (Mobile Game)",
       description: "",
+      link: null,
       imgUrl: burgermaking3,
-      images: [burgermaking1, burgermaking2, burgermaking4, burgermaking5,"https://assets.codepen.io/6093409/river.mp4"],
+      images: [
+        burgermaking1,
+        burgermaking2,
+        burgermaking4,
+        burgermaking5,
+        "https://assets.codepen.io/6093409/river.mp4",
+      ],
     },
     {
       title: "Funny Shooter 2 (WebGL Game)",
       description: "",
+      link: null,
       imgUrl: funnyShooter1,
       images: [funnyShooter2, funnyShooter3, funnyShooter4],
     },
     {
       title: "3D Car Parking (Mobile Game)",
       description: "",
+      link: "https://www.linkedin.com/",
       imgUrl: carparking1,
       images: [carparking2, carparking3, carparking4, carparking5],
     },
     {
       title: "Toon Car Parking 3D (Mobile Game)",
       description: "",
+      link: null,
       imgUrl: drcarparking1,
       images: [drcarparking2, drcarparking3, drcarparking4],
     },
     {
       title: "FPS Shooter (Mobile Game)",
       description: "",
+      link: null,
       imgUrl: fpsShooter1,
       images: [fpsShooter2, fpsShooter3, fpsShooter4, fpsShooter5],
     },
     {
       title: "Cowboy Shooting (Mobile Game)",
       description: "",
+      link: null,
       imgUrl: cowboyShootingcover,
       images: [
         CowboyShooting1,
@@ -273,9 +289,19 @@ export const Projects = () => {
                 <Typography variant="h5" gutterBottom>
                   Project Detail
                 </Typography>
-                <Typography id="alert-dialog-description">
-                  {currentProjectDescription}
-                </Typography>
+                <Typography>{currentProjectDescription}</Typography>
+                {currentProjectLink && (
+                  <Typography>
+                    <a
+                      href={currentProjectLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white"
+                    >
+                      Project Link
+                    </a>
+                  </Typography>
+                )}
               </Grid>
               <Grid size={{ xs: 12, md: 7 }}>
                 {currentProjectImages.length > 1 ? (
@@ -398,7 +424,8 @@ export const Projects = () => {
                                   handleOpen(
                                     project.images,
                                     project.title,
-                                    project.description
+                                    project.description,
+                                    project.link,
                                   )
                                 }
                               />
