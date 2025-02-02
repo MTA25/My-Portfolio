@@ -110,7 +110,8 @@ export const Projects = () => {
   const projects = [
     {
       title: "Azure Dungeon Survivor (Computer Game)",
-      description: "",
+      description: "The Bug Squasher Minigame uses a modular architecture to manage bug spawning, behavior, " +
+          "and gameplay mechanics through controllers and configurations.",
       link: "https://github.com/",
       imgUrl: Azure5,
       images: [Azure4, Azure3, Azure1],
@@ -287,7 +288,7 @@ export const Projects = () => {
             <Grid container spacing={2}>
               <Grid size={{ xs: 12, md: 5 }}>
                 <Typography variant="h5" gutterBottom>
-                  Project Detail
+                  Description:
                 </Typography>
                 <Typography>{currentProjectDescription}</Typography>
                 {currentProjectLink && (
