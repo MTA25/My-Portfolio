@@ -5,6 +5,7 @@ import navIcon1 from '../assets/img/nav-icon1.svg';
 import navIcon2 from '../assets/img/nav-icon2.svg';
 import navIcon3 from '../assets/img/nav-icon3.svg';
 import navIcon4 from "../assets/img/nav-icon4.svg";
+import Resume from "../assets/MuhammadTalhaResume.pdf";
 import { HashLink } from 'react-router-hash-link';
 import {
   BrowserRouter as Router
@@ -33,6 +34,13 @@ export const NavBar = () => {
     setActiveLink(value);
   }
 
+    const handleDownload = () => {
+      const link = document.createElement('a');
+      link.href = Resume;
+      link.download = 'TalhaResume.pdf';
+      link.click();
+    };
+
   return (
     <Router>
       <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
@@ -47,6 +55,7 @@ export const NavBar = () => {
             <Nav className="ms-auto">
               <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
               <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('skills')}>Skills</Nav.Link>
+              <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('projects')}>Projects</Nav.Link>
               {/*<Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('projects')}>Projects</Nav.Link>*/}
             </Nav>
             <span className="navbar-text">
@@ -57,7 +66,7 @@ export const NavBar = () => {
                 {/*<a href="#"><img src={navIcon3} alt="" /></a>*/}
               </div>
               <HashLink to='#projects'>
-                <button className="vvd"><span>Projects</span></button>
+                <button className="vvd" onClick={handleDownload}><span>Resume</span></button>
               </HashLink>
             </span>
           </Navbar.Collapse>

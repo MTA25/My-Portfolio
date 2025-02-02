@@ -70,6 +70,7 @@ import CowboyShooting3 from "../assets/projectImages/CowboyShooting1.png";
 import CowboyShooting4 from "../assets/projectImages/CowboyShooting3.png";
 import CowboyShooting5 from "../assets/projectImages/CowboyShooting4.png";
 import CowboyShooting6 from "../assets/projectImages/CowboyShooting5.png";
+import CowboyShootingVideo from "../assets/projectImages/DontTouch-video.mp4";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -136,7 +137,8 @@ export const Projects = () => {
   const projects = [
     {
       title: "Azure Dungeon Survivor (Computer Game)",
-      description: "",
+      description: "The Bug Squasher Minigame uses a modular architecture to manage bug spawning, behavior, " +
+          "and gameplay mechanics through controllers and configurations.",
       link: "https://github.com/",
       imgUrl: Azure5,
       images: [Azure4, Azure3, Azure1],
@@ -152,6 +154,7 @@ export const Projects = () => {
         burgermaking4,
         burgermaking5,
         vidoe1,
+        CowboyShootingVideo,
       ],
     },
     {
@@ -313,7 +316,7 @@ export const Projects = () => {
             <Grid container spacing={2}>
               <Grid size={{ xs: 12, md: 5 }}>
                 <Typography variant="h5" gutterBottom>
-                  Project Detail
+                  Description:
                 </Typography>
                 <Typography>{currentProjectDescription}</Typography>
                 {currentProjectLink && (
@@ -453,13 +456,7 @@ export const Projects = () => {
                           <Nav.Link eventKey="second">UML Diagrams</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                          <Nav.Link
-                            eventKey="third"
-                            href="https://github.com/MTA25/Architecture-Demo"
-                            target="_blank"
-                          >
-                            Architecture Demo Project
-                          </Nav.Link>
+                          <Nav.Link eventKey="third">Architecture Demo Project</Nav.Link>
                         </Nav.Item>
                       </Nav>
 
@@ -509,6 +506,18 @@ export const Projects = () => {
                           </Row>
                         </Tab.Pane>
                         <Tab.Pane eventKey="third">
+
+                          <Nav className="nav-pills mb-5 justify-content-center align-items-center">
+                            <Nav.Item>
+                              <Nav.Link
+                                  href="https://github.com/MTA25/Architecture-Demo"
+                                  target="_blank"
+                              >
+                                Demo Project
+                              </Nav.Link>
+                            </Nav.Item>
+                          </Nav>
+                          
                           <p>
                             I write clean, well-structured, and reusable code by
                             following best practices, such as maintaining
