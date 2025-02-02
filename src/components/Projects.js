@@ -396,13 +396,7 @@ export const Projects = () => {
                           <Nav.Link eventKey="second">UML Diagrams</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                          <Nav.Link
-                            eventKey="third"
-                            href="https://github.com/MTA25/Architecture-Demo"
-                            target="_blank"
-                          >
-                            Architecture Demo Project
-                          </Nav.Link>
+                          <Nav.Link eventKey="third">Architecture Demo Project</Nav.Link>
                         </Nav.Item>
                       </Nav>
 
@@ -452,6 +446,18 @@ export const Projects = () => {
                           </Row>
                         </Tab.Pane>
                         <Tab.Pane eventKey="third">
+
+                          <Nav className="nav-pills mb-5 justify-content-center align-items-center">
+                            <Nav.Item>
+                              <Nav.Link
+                                  href="https://github.com/MTA25/Architecture-Demo"
+                                  target="_blank"
+                              >
+                                Demo Project
+                              </Nav.Link>
+                            </Nav.Item>
+                          </Nav>
+                          
                           <p>
                             I write clean, well-structured, and reusable code by
                             following best practices, such as maintaining
