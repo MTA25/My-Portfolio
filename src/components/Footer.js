@@ -14,17 +14,17 @@ export const Footer = () => {
           {/*<MailchimpForm />*/}
           <Col size={12} sm={6}>
             {/*<img src={logo} alt="Logo" />*/}
-            <h2 className="text-center text-sm-start footer-title">Muhammad Talha</h2>
+            <h2 className="text-center text-sm-start footer-title">Muhammad Talha Arshad, Unity 3D Game Developer</h2>
           </Col>
           <Col size={12} sm={6} className="text-center text-sm-end">
             <div className="social-icon">
-              <a href="#"><img src={navIcon1} alt="Icon" /></a>
-              <a href="#"><img src={navIcon4} alt="Icon" /></a>
+              <a href="https://www.linkedin.com/in/muhammad-talha-arshad-661286167/" target={"_blank"}><img src={navIcon1} alt="Icon" /></a>
+              <a href="https://github.com/MTA25" target={"_blank"}><img src={navIcon4} alt="Icon" /></a>
               {/*<a href="#"><img src={navIcon2} alt="Icon" /></a>
               <a href="#"><img src={navIcon3} alt="Icon" /></a>*/}
             </div>
             
-            <p>Copyright 2022. All Rights Reserved</p>
+            <p>Copyright 2025. All Rights Reserved</p>
           </Col>
         </Row>
       </Container>

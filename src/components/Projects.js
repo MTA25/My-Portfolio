@@ -158,7 +158,6 @@ export const Projects = () => {
         burgermaking2,
         burgermaking4,
         burgermaking5,
-        CowboyShootingVideo,
       ],
     },
     {
