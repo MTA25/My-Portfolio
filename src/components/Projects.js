@@ -67,6 +67,7 @@ import CowboyShooting3 from "../assets/projectImages/CowboyShooting1.png";
 import CowboyShooting4 from "../assets/projectImages/CowboyShooting3.png";
 import CowboyShooting5 from "../assets/projectImages/CowboyShooting4.png";
 import CowboyShooting6 from "../assets/projectImages/CowboyShooting5.png";
+import CowboyShootingVideo from "../assets/projectImages/DontTouch-video.mp4";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -126,7 +127,7 @@ export const Projects = () => {
         burgermaking2,
         burgermaking4,
         burgermaking5,
-        "https://assets.codepen.io/6093409/river.mp4",
+        CowboyShootingVideo,
       ],
     },
     {
