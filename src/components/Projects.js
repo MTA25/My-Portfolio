@@ -31,9 +31,6 @@ import shootingsystemUML from "../assets/documentImages/shootingsystem.png";
 import saveLoadDataUML from "../assets/documentImages/SaveLoadData UML.png";
 import saveLoadDataDFD from "../assets/documentImages/SaveLoadData DFD.png";
 
-//Project Video
-import vidoe1 from "../assets/video/video1.mp4";
-
 //Project Images
 import Azure1 from "../assets/projectImages/Azure1.png";
 import Azure2 from "../assets/projectImages/Azure2.png";
@@ -110,7 +107,7 @@ export const Projects = () => {
       "drop-shadow(2px 2px 10px #aa367c) drop-shadow(-2px -2px 10px #4a2fbd)",
   };
 
-  const [showImages, setShowImages] = useState(true);
+  const [showImages, setShowImages] = useState(true); // Default to showing images
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
 
@@ -134,11 +131,19 @@ export const Projects = () => {
     separateImagesAndVideos();
   }, [currentProjectImages]);
 
+  // Reset showImages to true whenever modal is opened
+  React.useEffect(() => {
+    if (open) {
+      setShowImages(true); // Show images by default when modal opens
+    }
+  }, [open]);
+
   const projects = [
     {
       title: "Azure Dungeon Survivor (Computer Game)",
-      description: "The Bug Squasher Minigame uses a modular architecture to manage bug spawning, behavior, " +
-          "and gameplay mechanics through controllers and configurations.",
+      description:
+        "The Bug Squasher Minigame uses a modular architecture to manage bug spawning, behavior, " +
+        "and gameplay mechanics through controllers and configurations.",
       link: "https://github.com/",
       imgUrl: Azure5,
       images: [Azure4, Azure3, Azure1],
@@ -153,7 +158,6 @@ export const Projects = () => {
         burgermaking2,
         burgermaking4,
         burgermaking5,
-        vidoe1,
         CowboyShootingVideo,
       ],
     },
@@ -343,7 +347,6 @@ export const Projects = () => {
                         Show Images
                       </button>
                     )}
-
                     {videos.length > 0 && (
                       <button
                         onClick={() => setShowImages(false)}
@@ -456,7 +459,9 @@ export const Projects = () => {
                           <Nav.Link eventKey="second">UML Diagrams</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                          <Nav.Link eventKey="third">Architecture Demo Project</Nav.Link>
+                          <Nav.Link eventKey="third">
+                            Architecture Demo Project
+                          </Nav.Link>
                         </Nav.Item>
                       </Nav>
 
@@ -506,18 +511,17 @@ export const Projects = () => {
                           </Row>
                         </Tab.Pane>
                         <Tab.Pane eventKey="third">
-
                           <Nav className="nav-pills mb-5 justify-content-center align-items-center">
                             <Nav.Item>
                               <Nav.Link
-                                  href="https://github.com/MTA25/Architecture-Demo"
-                                  target="_blank"
+                                href="https://github.com/MTA25/Architecture-Demo"
+                                target="_blank"
                               >
                                 Demo Project
                               </Nav.Link>
                             </Nav.Item>
                           </Nav>
-                          
+
                           <p>
                             I write clean, well-structured, and reusable code by
                             following best practices, such as maintaining
