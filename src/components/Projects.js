@@ -85,6 +85,9 @@ export const Projects = () => {
   const [currentProjectLink, setCurrentProjectLink] = React.useState("");
   const [currentProjectDescription, setCurrentProjectDescription] =
     React.useState("");
+  const [playingVideo, setPlayingVideo] = useState(null);
+  const [openVideoDialog, setOpenVideoDialog] = useState(false);
+  const [currentVideoSrc, setCurrentVideoSrc] = useState("");
   const handleOpen = (images, title, description, link) => {
     setCurrentProjectImages(images);
     setCurrentProjectTitle(title);
@@ -107,36 +110,16 @@ export const Projects = () => {
       "drop-shadow(2px 2px 10px #aa367c) drop-shadow(-2px -2px 10px #4a2fbd)",
   };
 
-  const [showImages, setShowImages] = useState(true); // Default to showing images
-  const [images, setImages] = useState([]);
-  const [videos, setVideos] = useState([]);
-
-  const separateImagesAndVideos = () => {
-    const tempImages = [];
-    const tempVideos = [];
-
-    currentProjectImages.forEach((media) => {
-      if (typeof media === "string" && media.includes(".mp4")) {
-        tempVideos.push(media);
-      } else {
-        tempImages.push(media);
-      }
-    });
-
-    setImages(tempImages);
-    setVideos(tempVideos);
+  const handlePlayVideo = (index) => {
+    const videoSrc = currentProjectImages[index];
+    setCurrentVideoSrc(videoSrc);
+    setOpenVideoDialog(true);
   };
 
-  React.useEffect(() => {
-    separateImagesAndVideos();
-  }, [currentProjectImages]);
-
-  // Reset showImages to true whenever modal is opened
-  React.useEffect(() => {
-    if (open) {
-      setShowImages(true); // Show images by default when modal opens
-    }
-  }, [open]);
+  const handleCloseVideoDialog = () => {
+    setOpenVideoDialog(false);
+    setCurrentVideoSrc("");
+  };
 
   const projects = [
     {
@@ -146,19 +129,14 @@ export const Projects = () => {
         "and gameplay mechanics through controllers and configurations.",
       link: "https://github.com/",
       imgUrl: Azure5,
-      images: [Azure4, Azure3, Azure1],
+      images: [Azure4, Azure3, Azure1, CowboyShootingVideo],
     },
     {
       title: "Top Burger (Mobile Game)",
       description: "",
       link: null,
       imgUrl: burgermaking3,
-      images: [
-        burgermaking1,
-        burgermaking2,
-        burgermaking4,
-        burgermaking5,
-      ],
+      images: [burgermaking1, burgermaking2, burgermaking4, burgermaking5],
     },
     {
       title: "Funny Shooter 2 (WebGL Game)",
@@ -285,6 +263,51 @@ export const Projects = () => {
   return (
     <>
       <div>
+        {/* Modal for displaying the video */}
+        <BootstrapDialog
+          onClose={handleCloseVideoDialog}
+          aria-labelledby="video-dialog-title"
+          open={openVideoDialog}
+          fullWidth
+          maxWidth="sm"
+          style={{ zIndex: "100000" }}
+          sx={{
+            "& .MuiPaper-root": {
+              backgroundColor: "#1f1d1d",
+              color: "#fff",
+              padding: 0,
+            },
+          }}
+        >
+          <IconButton
+            aria-label="close"
+            onClick={handleCloseVideoDialog}
+            sx={(theme) => ({
+              position: "absolute",
+              right: 8,
+              top: 8,
+              zIndex: 100,
+              color: theme.palette.grey[500],
+            })}
+          >
+            <CloseIcon />
+          </IconButton>
+          <DialogContent className="p-3">
+            <video
+              controls
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="d-block w-100 carousel-img"
+              style={{ backgroundColor: "#1f1d1d" }}
+            >
+              <source src={currentVideoSrc} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </DialogContent>
+        </BootstrapDialog>
+
         <BootstrapDialog
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
@@ -321,105 +344,63 @@ export const Projects = () => {
                 <Typography variant="h5" gutterBottom>
                   Description:
                 </Typography>
-                <Typography>{currentProjectDescription}</Typography>
+                <Typography gutterBottom>
+                  {currentProjectDescription}
+                </Typography>
                 {currentProjectLink && (
-                  <Typography>
-                    <a
-                      href={currentProjectLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white"
-                    >
-                      Project Link
-                    </a>
+                  <Typography className="mt-4">
+                    <span className="anim-btn">
+                      <a
+                        href={currentProjectLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white ms-0"
+                        style={{ textDecoration: "none"}}
+                      >
+                        <span>Project Link</span>
+                      </a>
+                    </span>
                   </Typography>
                 )}
               </Grid>
               <Grid size={{ xs: 12, md: 7 }}>
-                {images.length > 0 || videos.length > 0 ? (
-                  <div>
-                    {images.length > 1 && (
-                      <button
-                        onClick={() => setShowImages(true)}
-                        className="text-white me-4"
-                      >
-                        Show Images
-                      </button>
-                    )}
-                    {videos.length > 0 && (
-                      <button
-                        onClick={() => setShowImages(false)}
-                        className="text-white"
-                      >
-                        Show Videos
-                      </button>
-                    )}
-                  </div>
-                ) : null}
-
-                {images.length === 1 && videos.length === 0 ? (
-                  <img
-                    src={images[0]}
-                    className="d-block w-100 carousel-img"
-                    alt="Project img"
-                  />
-                ) : null}
-
-                {videos.length === 1 && images.length === 0 ? (
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    controls
-                    className="d-block w-100 carousel-img"
-                    poster="https://via.placeholder.com/800x450"
-                  >
-                    <source src={videos[0]} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                ) : null}
-
-                {showImages && images.length > 1 ? (
+                {currentProjectImages.length > 0 && (
                   <Carousel
+                    interval={null}
                     prevIcon={<FaArrowLeft style={gradientStyle} />}
                     nextIcon={<FaArrowRight style={gradientStyle} />}
                   >
-                    {images.map((media, index) => (
+                    {currentProjectImages.map((media, index) => (
                       <Carousel.Item key={index}>
-                        <img
-                          src={media}
-                          className="d-block w-100 carousel-img"
-                          alt={`Slide ${index + 1}`}
-                        />
+                        {typeof media === "string" && media.includes(".mp4") ? (
+                          <div className="position-relative">
+                            <video
+                              loop
+                              muted
+                              className="d-block w-100 carousel-img"
+                              poster="https://via.placeholder.com/800x450"
+                            >
+                              <source src={media} type="video/mp4" />
+                              Your browser does not support the video tag.
+                            </video>
+                            <button
+                              onClick={() => handlePlayVideo(index)}
+                              className="position-absolute top-50 start-50 translate-middle btn btn-light"
+                            >
+                              Play video
+                            </button>
+                          </div>
+                        ) : (
+                          <img
+                            src={media}
+                            className="d-block w-100 carousel-img"
+                            alt={`Slide ${index + 1}`}
+                          />
+                        )}
                       </Carousel.Item>
                     ))}
                   </Carousel>
-                ) : null}
-
-                {!showImages && videos.length > 0 ? (
-                  <Carousel
-                    prevIcon={<FaArrowLeft style={gradientStyle} />}
-                    nextIcon={<FaArrowRight style={gradientStyle} />}
-                  >
-                    {videos.map((media, index) => (
-                      <Carousel.Item key={index}>
-                        <video
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          controls
-                          className="d-block w-100 carousel-img"
-                          poster="https://via.placeholder.com/800x450"
-                        >
-                          <source src={media} type="video/mp4" />
-                          Your browser does not support the video tag.
-                        </video>
-                      </Carousel.Item>
-                    ))}
-                  </Carousel>
-                ) : null}
+                )}
               </Grid>
             </Grid>
           </DialogContent>
