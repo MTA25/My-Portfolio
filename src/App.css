@@ -543,6 +543,38 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   }
 }
 
+.diagram-btn {
+  background-color: transparent;
+  border-radius: 8px;
+  padding: 17px 98px;
+  color: #fff;
+  font-size: 17px;
+  letter-spacing: 0.8px;
+  font-weight: 500;
+  position: relative;
+  transition: 0.3s ease-in-out;
+  border: 1px solid white;
+  text-align: center;
+  z-index: 0;
+  text-decoration: none;
+}
+.diagram-btn::before {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(95deg, #aa367c -5.91%, #4a2fbd 111.58%);
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: 0.3s ease-in-out;
+}
+.diagram-btn:hover::before {
+  width: 100%;
+  border-radius: 8px;
+}
+
 /************ Contact Css ************/
 .contact {
   background: linear-gradient(90.21deg, #aa367c -5.91%, #4a2fbd 111.58%);

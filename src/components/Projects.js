@@ -80,6 +80,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 export const Projects = () => {
   const [open, setOpen] = React.useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const [currentProjectImages, setCurrentProjectImages] = React.useState([]);
   const [currentProjectTitle, setCurrentProjectTitle] = React.useState("");
   const [currentProjectLink, setCurrentProjectLink] = React.useState("");
@@ -355,7 +356,7 @@ export const Projects = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white ms-0"
-                        style={{ textDecoration: "none"}}
+                        style={{ textDecoration: "none" }}
                       >
                         <span>Project Link</span>
                       </a>
@@ -367,8 +368,16 @@ export const Projects = () => {
                 {currentProjectImages.length > 0 && (
                   <Carousel
                     interval={null}
-                    prevIcon={<FaArrowLeft style={gradientStyle} />}
-                    nextIcon={<FaArrowRight style={gradientStyle} />}
+                    prevIcon={
+                      currentProjectImages.length > 1 ? (
+                        <FaArrowLeft style={gradientStyle} />
+                      ) : null
+                    }
+                    nextIcon={
+                      currentProjectImages.length > 1 ? (
+                        <FaArrowRight style={gradientStyle} />
+                      ) : null
+                    }
                   >
                     {currentProjectImages.map((media, index) => (
                       <Carousel.Item key={index}>
@@ -411,116 +420,119 @@ export const Projects = () => {
           <Row>
             <Col size={12}>
               <TrackVisibility>
-                {({ isVisible }) => (
-                  <div
-                    className={
-                      isVisible ? "animate__animated animate__fadeIn" : ""
-                    }
-                  >
-                    <h2>Projects</h2>
-                    <p>
-                      This portfolio showcases a collection of game development
-                      projects, demonstrating expertise in creating engaging and
-                      immersive gaming experiences. It highlights proficiency in
-                      game design, programming, and interactive storytelling.
-                    </p>
-                    <Tab.Container id="projects-tabs" defaultActiveKey="first">
-                      <Nav
-                        variant="pills"
-                        className="nav-pills mb-5 justify-content-center align-items-center"
-                        id="pills-tab"
-                      >
-                        <Nav.Item>
-                          <Nav.Link eventKey="first">
-                            Developed Projects
-                          </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                          <Nav.Link eventKey="second">UML Diagrams</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                          <Nav.Link eventKey="third">
-                            Architecture Demo Project
-                          </Nav.Link>
-                        </Nav.Item>
-                      </Nav>
+                {({ isVisible }) => {
+                  if (isVisible && !hasAnimated) setHasAnimated(true); // Prevent blinking
 
-                      <Tab.Content
-                        id="slideInUp"
-                        className={
-                          isVisible
-                            ? "animate__animated animate__slideInUp"
-                            : ""
-                        }
+                  return (
+                    <div
+                      className={
+                        hasAnimated ? "animate__animated animate__fadeIn" : ""
+                      }
+                    >
+                      <h2>Projects</h2>
+                      <p>
+                        This portfolio showcases a collection of game
+                        development projects, demonstrating expertise in
+                        creating engaging and immersive gaming experiences. It
+                        highlights proficiency in game design, programming, and
+                        interactive storytelling.
+                      </p>
+                      <Tab.Container
+                        id="projects-tabs"
+                        defaultActiveKey="first"
                       >
-                        <Tab.Pane eventKey="first">
-                          <Row>
-                            {projects.map((project, index) => (
-                              <ProjectCard
-                                key={index}
-                                {...project}
-                                onClick={() =>
-                                  handleOpen(
-                                    project.images,
-                                    project.title,
-                                    project.description,
-                                    project.link
-                                  )
-                                }
-                              />
-                            ))}
-                          </Row>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="second">
-                          <Row>
-                            {documents.map((document, index) => {
-                              return (
+                        <Nav
+                          variant="pills"
+                          className="nav-pills mb-5 justify-content-center align-items-center"
+                          id="pills-tab"
+                        >
+                          <Nav.Item>
+                            <Nav.Link eventKey="first">
+                              Developed Projects
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item>
+                            <Nav.Link eventKey="second">UML Diagrams</Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item>
+                            <Nav.Link eventKey="third">
+                              Architecture Demo Project
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
+
+                        <Tab.Content
+                          id="slideInUp"
+                          className="animate__animated animate__slideInUp"
+                        >
+                          <Tab.Pane eventKey="first">
+                            <Row>
+                              {projects.map((project, index) => (
                                 <ProjectCard
                                   key={index}
-                                  {...document}
+                                  {...project}
                                   onClick={() =>
                                     handleOpen(
-                                      document.imgUrl,
-                                      document.title,
-                                      document.description
+                                      project.images,
+                                      project.title,
+                                      project.description,
+                                      project.link
                                     )
                                   }
                                 />
-                              );
-                            })}
-                          </Row>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="third">
-                          <Nav className="nav-pills mb-5 justify-content-center align-items-center">
-                            <Nav.Item>
-                              <Nav.Link
+                              ))}
+                            </Row>
+                          </Tab.Pane>
+                          <Tab.Pane eventKey="second">
+                            <Row>
+                              {documents.map((document, index) => {
+                                return (
+                                  <ProjectCard
+                                    key={index}
+                                    {...document}
+                                    onClick={() =>
+                                      handleOpen(
+                                        document.imgUrl,
+                                        document.title,
+                                        document.description
+                                      )
+                                    }
+                                  />
+                                );
+                              })}
+                            </Row>
+                          </Tab.Pane>
+                          <Tab.Pane eventKey="third">
+                            <div className="d-flex justify-content-center align-items-center">
+                              <a
                                 href="https://github.com/MTA25/Architecture-Demo"
                                 target="_blank"
+                                className="diagram-btn"
+                                rel="noopener noreferrer"
                               >
                                 Demo Project
-                              </Nav.Link>
-                            </Nav.Item>
-                          </Nav>
-
-                          <p>
-                            I write clean, well-structured, and reusable code by
-                            following best practices, such as maintaining
-                            modularity, adhering to naming conventions, and
-                            using design patterns where applicable. I focus on
-                            simplicity and clarity while ensuring reusability by
-                            creating generic components, functions, or classes
-                            that can be easily adapted for different use cases.
-                            Regarding the project, you can find it on the
-                            attached GitHub link. Please feel free to review the
-                            code structure and see if it aligns with your needs.
-                            Additionally, I can adapt and work according to your
-                            specific requirements.
-                          </p>
-                        </Tab.Pane>
-                      </Tab.Content>
-                    </Tab.Container>
-                  </div>
-                )}
+                              </a>
+                            </div>
+                            <p>
+                              I write clean, well-structured, and reusable code
+                              by following best practices, such as maintaining
+                              modularity, adhering to naming conventions, and
+                              using design patterns where applicable. I focus on
+                              simplicity and clarity while ensuring reusability
+                              by creating generic components, functions, or
+                              classes that can be easily adapted for different
+                              use cases. Regarding the project, you can find it
+                              on the attached GitHub link. Please feel free to
+                              review the code structure and see if it aligns
+                              with your needs. Additionally, I can adapt and
+                              work according to your specific requirements.
+                            </p>
+                          </Tab.Pane>
+                        </Tab.Content>
+                      </Tab.Container>
+                    </div>
+                  );
+                }}
               </TrackVisibility>
             </Col>
           </Row>
