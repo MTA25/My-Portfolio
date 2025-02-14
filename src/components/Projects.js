@@ -3,7 +3,7 @@ import { ProjectCard } from "./ProjectCard";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
-import * as React from "react";
+import React, { useState, useRef } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -80,11 +80,15 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 export const Projects = () => {
   const [open, setOpen] = React.useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const [currentProjectImages, setCurrentProjectImages] = React.useState([]);
   const [currentProjectTitle, setCurrentProjectTitle] = React.useState("");
   const [currentProjectLink, setCurrentProjectLink] = React.useState("");
   const [currentProjectDescription, setCurrentProjectDescription] =
     React.useState("");
+  const [playingVideo, setPlayingVideo] = useState(null);
+  const [openVideoDialog, setOpenVideoDialog] = useState(false);
+  const [currentVideoSrc, setCurrentVideoSrc] = useState("");
   const handleOpen = (images, title, description, link) => {
     setCurrentProjectImages(images);
     setCurrentProjectTitle(title);
@@ -100,7 +104,6 @@ export const Projects = () => {
     setCurrentProjectLink("");
   };
 
-  // carousel navigation icon
   const gradientStyle = {
     color: "white",
     fontSize: "2rem",
@@ -108,26 +111,33 @@ export const Projects = () => {
       "drop-shadow(2px 2px 10px #aa367c) drop-shadow(-2px -2px 10px #4a2fbd)",
   };
 
+  const handlePlayVideo = (index) => {
+    const videoSrc = currentProjectImages[index];
+    setCurrentVideoSrc(videoSrc);
+    setOpenVideoDialog(true);
+  };
+
+  const handleCloseVideoDialog = () => {
+    setOpenVideoDialog(false);
+    setCurrentVideoSrc("");
+  };
+
   const projects = [
     {
       title: "Azure Dungeon Survivor (Computer Game)",
-      description: "The Bug Squasher Minigame uses a modular architecture to manage bug spawning, behavior, " +
-          "and gameplay mechanics through controllers and configurations.",
+      description:
+        "The Bug Squasher Minigame uses a modular architecture to manage bug spawning, behavior, " +
+        "and gameplay mechanics through controllers and configurations.",
       link: "https://github.com/",
       imgUrl: Azure5,
-      images: [Azure4, Azure3, Azure1],
+      images: [Azure4, Azure3, Azure1, CowboyShootingVideo],
     },
     {
       title: "Top Burger (Mobile Game)",
       description: "",
       link: null,
       imgUrl: burgermaking3,
-      images: [
-        burgermaking1,
-        burgermaking2,
-        burgermaking4,
-        burgermaking5,
-      ],
+      images: [burgermaking1, burgermaking2, burgermaking4, burgermaking5],
     },
     {
       title: "Funny Shooter 2 (WebGL Game)",
@@ -254,6 +264,51 @@ export const Projects = () => {
   return (
     <>
       <div>
+        {/* Modal for displaying the video */}
+        <BootstrapDialog
+          onClose={handleCloseVideoDialog}
+          aria-labelledby="video-dialog-title"
+          open={openVideoDialog}
+          fullWidth
+          maxWidth="sm"
+          style={{ zIndex: "100000" }}
+          sx={{
+            "& .MuiPaper-root": {
+              backgroundColor: "#1f1d1d",
+              color: "#fff",
+              padding: 0,
+            },
+          }}
+        >
+          <IconButton
+            aria-label="close"
+            onClick={handleCloseVideoDialog}
+            sx={(theme) => ({
+              position: "absolute",
+              right: 8,
+              top: 8,
+              zIndex: 100,
+              color: theme.palette.grey[500],
+            })}
+          >
+            <CloseIcon />
+          </IconButton>
+          <DialogContent className="p-3">
+            <video
+              controls
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="d-block w-100 carousel-img"
+              style={{ backgroundColor: "#1f1d1d" }}
+            >
+              <source src={currentVideoSrc} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </DialogContent>
+        </BootstrapDialog>
+
         <BootstrapDialog
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
@@ -290,74 +345,70 @@ export const Projects = () => {
                 <Typography variant="h5" gutterBottom>
                   Description:
                 </Typography>
-                <Typography>{currentProjectDescription}</Typography>
+                <Typography gutterBottom>
+                  {currentProjectDescription}
+                </Typography>
                 {currentProjectLink && (
-                  <Typography>
-                    <a
-                      href={currentProjectLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white"
-                    >
-                      Project Link
-                    </a>
+                  <Typography className="mt-4">
+                    <span className="anim-btn">
+                      <a
+                        href={currentProjectLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white ms-0"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <span>Project Link</span>
+                      </a>
+                    </span>
                   </Typography>
                 )}
               </Grid>
               <Grid size={{ xs: 12, md: 7 }}>
-                {currentProjectImages.length > 1 ? (
+                {currentProjectImages.length > 0 && (
                   <Carousel
-                    prevIcon={<FaArrowLeft style={gradientStyle} />}
-                    nextIcon={<FaArrowRight style={gradientStyle} />}
+                    interval={null}
+                    prevIcon={
+                      currentProjectImages.length > 1 ? (
+                        <FaArrowLeft style={gradientStyle} />
+                      ) : null
+                    }
+                    nextIcon={
+                      currentProjectImages.length > 1 ? (
+                        <FaArrowRight style={gradientStyle} />
+                      ) : null
+                    }
                   >
                     {currentProjectImages.map((media, index) => (
                       <Carousel.Item key={index}>
                         {typeof media === "string" && media.includes(".mp4") ? (
-                          <video
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            controls
-                            className="d-block w-100 carousel-img"
-                            poster={currentProjectImages[0]}
-                          >
-                            <source src={media} type="video/mp4" /> Your browser
-                            does not support the video tag.
-                          </video>
-                        ) : media ? (
+                          <div className="position-relative">
+                            <video
+                              loop
+                              muted
+                              className="d-block w-100 carousel-img"
+                              poster="https://via.placeholder.com/800x450"
+                            >
+                              <source src={media} type="video/mp4" />
+                              Your browser does not support the video tag.
+                            </video>
+                            <button
+                              onClick={() => handlePlayVideo(index)}
+                              className="position-absolute top-50 start-50 translate-middle btn btn-light"
+                            >
+                              Play video
+                            </button>
+                          </div>
+                        ) : (
                           <img
                             src={media}
                             className="d-block w-100 carousel-img"
                             alt={`Slide ${index + 1}`}
                           />
-                        ) : (
-                          <p>Error loading media</p>
                         )}
                       </Carousel.Item>
                     ))}
                   </Carousel>
-                ) : currentProjectImages[0] &&
-                  typeof currentProjectImages[0] === "string" &&
-                  currentProjectImages[0].includes(".mp4") ? (
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="d-block w-100 carousel-video"
-                    poster="https://via.placeholder.com/800x450"
-                  >
-                    <source src={currentProjectImages[0]} type="video/mp4" />
-                  </video>
-                ) : (
-                  currentProjectImages[0] && (
-                    <img
-                      src={currentProjectImages[0]}
-                      className="d-block w-100 carousel-img"
-                      alt="Slide 1"
-                    />
-                  )
                 )}
               </Grid>
             </Grid>
@@ -369,115 +420,119 @@ export const Projects = () => {
           <Row>
             <Col size={12}>
               <TrackVisibility>
-                {({ isVisible }) => (
-                  <div
-                    className={
-                      isVisible ? "animate__animated animate__fadeIn" : ""
-                    }
-                  >
-                    <h2>Projects</h2>
-                    <p>
-                      This portfolio showcases a collection of game development
-                      projects, demonstrating expertise in creating engaging and
-                      immersive gaming experiences. It highlights proficiency in
-                      game design, programming, and interactive storytelling.
-                    </p>
-                    <Tab.Container id="projects-tabs" defaultActiveKey="first">
-                      <Nav
-                        variant="pills"
-                        className="nav-pills mb-5 justify-content-center align-items-center"
-                        id="pills-tab"
-                      >
-                        <Nav.Item>
-                          <Nav.Link eventKey="first">
-                            Developed Projects
-                          </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                          <Nav.Link eventKey="second">UML Diagrams</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                          <Nav.Link eventKey="third">Architecture Demo Project</Nav.Link>
-                        </Nav.Item>
-                      </Nav>
+                {({ isVisible }) => {
+                  if (isVisible && !hasAnimated) setHasAnimated(true); // Prevent blinking
 
-                      <Tab.Content
-                        id="slideInUp"
-                        className={
-                          isVisible
-                            ? "animate__animated animate__slideInUp"
-                            : ""
-                        }
+                  return (
+                    <div
+                      className={
+                        hasAnimated ? "animate__animated animate__fadeIn" : ""
+                      }
+                    >
+                      <h2>Projects</h2>
+                      <p>
+                        This portfolio showcases a collection of game
+                        development projects, demonstrating expertise in
+                        creating engaging and immersive gaming experiences. It
+                        highlights proficiency in game design, programming, and
+                        interactive storytelling.
+                      </p>
+                      <Tab.Container
+                        id="projects-tabs"
+                        defaultActiveKey="first"
                       >
-                        <Tab.Pane eventKey="first">
-                          <Row>
-                            {projects.map((project, index) => (
-                              <ProjectCard
-                                key={index}
-                                {...project}
-                                onClick={() =>
-                                  handleOpen(
-                                    project.images,
-                                    project.title,
-                                    project.description,
-                                    project.link,
-                                  )
-                                }
-                              />
-                            ))}
-                          </Row>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="second">
-                          <Row>
-                            {documents.map((document, index) => {
-                              return (
+                        <Nav
+                          variant="pills"
+                          className="nav-pills mb-5 justify-content-center align-items-center"
+                          id="pills-tab"
+                        >
+                          <Nav.Item>
+                            <Nav.Link eventKey="first">
+                              Developed Projects
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item>
+                            <Nav.Link eventKey="second">UML Diagrams</Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item>
+                            <Nav.Link eventKey="third">
+                              Architecture Demo Project
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
+
+                        <Tab.Content
+                          id="slideInUp"
+                          className="animate__animated animate__slideInUp"
+                        >
+                          <Tab.Pane eventKey="first">
+                            <Row>
+                              {projects.map((project, index) => (
                                 <ProjectCard
                                   key={index}
-                                  {...document}
+                                  {...project}
                                   onClick={() =>
                                     handleOpen(
-                                      document.imgUrl,
-                                      document.title,
-                                      document.description
+                                      project.images,
+                                      project.title,
+                                      project.description,
+                                      project.link
                                     )
                                   }
                                 />
-                              );
-                            })}
-                          </Row>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="third">
-
-                          <Nav className="nav-pills mb-5 justify-content-center align-items-center">
-                            <Nav.Item>
-                              <Nav.Link
-                                  href="https://github.com/MTA25/Architecture-Demo"
-                                  target="_blank"
+                              ))}
+                            </Row>
+                          </Tab.Pane>
+                          <Tab.Pane eventKey="second">
+                            <Row>
+                              {documents.map((document, index) => {
+                                return (
+                                  <ProjectCard
+                                    key={index}
+                                    {...document}
+                                    onClick={() =>
+                                      handleOpen(
+                                        document.imgUrl,
+                                        document.title,
+                                        document.description
+                                      )
+                                    }
+                                  />
+                                );
+                              })}
+                            </Row>
+                          </Tab.Pane>
+                          <Tab.Pane eventKey="third">
+                            <div className="d-flex justify-content-center align-items-center">
+                              <a
+                                href="https://github.com/MTA25/Architecture-Demo"
+                                target="_blank"
+                                className="diagram-btn"
+                                rel="noopener noreferrer"
                               >
                                 Demo Project
-                              </Nav.Link>
-                            </Nav.Item>
-                          </Nav>
-                          
-                          <p>
-                            I write clean, well-structured, and reusable code by
-                            following best practices, such as maintaining
-                            modularity, adhering to naming conventions, and
-                            using design patterns where applicable. I focus on
-                            simplicity and clarity while ensuring reusability by
-                            creating generic components, functions, or classes
-                            that can be easily adapted for different use cases.
-                            Regarding the project, you can find it on the
-                            attached GitHub link. Please feel free to review the
-                            code structure and see if it aligns with your needs.
-                            Additionally, I can adapt and work according to your
-                            specific requirements.
-                          </p>
-                        </Tab.Pane>
-                      </Tab.Content>
-                    </Tab.Container>
-                  </div>
-                )}
+                              </a>
+                            </div>
+                            <p>
+                              I write clean, well-structured, and reusable code
+                              by following best practices, such as maintaining
+                              modularity, adhering to naming conventions, and
+                              using design patterns where applicable. I focus on
+                              simplicity and clarity while ensuring reusability
+                              by creating generic components, functions, or
+                              classes that can be easily adapted for different
+                              use cases. Regarding the project, you can find it
+                              on the attached GitHub link. Please feel free to
+                              review the code structure and see if it aligns
+                              with your needs. Additionally, I can adapt and
+                              work according to your specific requirements.
+                            </p>
+                          </Tab.Pane>
+                        </Tab.Content>
+                      </Tab.Container>
+                    </div>
+                  );
+                }}
               </TrackVisibility>
             </Col>
           </Row>
