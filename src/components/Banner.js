@@ -76,7 +76,7 @@ export const Banner = () => {
                     </span>
                   </h1>
                   <p>
-                    I am a passionate Game Developer with over three years of experience creating immersive gaming experiences. 
+                    I am a passionate Game Developer with over five years of experience creating immersive gaming experiences. 
                     Skilled in the latest technologies. I specialize in building robust feature architectures to enhance gameplay. 
                     Proficient in various programming languages, I prioritize writing clean, reusable, and well-documented code 
                     to ensure high-quality game performance.
