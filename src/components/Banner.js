@@ -76,21 +76,30 @@ export const Banner = () => {
                     </span>
                   </h1>
                   <p>
-                    I am a passionate Game Developer with over five years of experience creating immersive gaming experiences. 
-                    Skilled in the latest technologies. I specialize in building robust feature architectures to enhance gameplay. 
-                    Proficient in various programming languages, I prioritize writing clean, reusable, and well-documented code 
-                    to ensure high-quality game performance.
+                    I am a passionate Game Developer with over four years of professional experience
+                    creating immersive and engaging gaming experiences across multiple platforms.
+                    I specialize in designing robust gameplay systems and feature-driven architectures
+                    that enhance performance, scalability, and player experience.
                     <br />
                     <br />
-                    My expertise includes optimizing game engines, debugging
-                    complex issues, and refining game architecture to boost
-                    productivity and deliver seamless gameplay. With a strong
-                    eye for detail and a solid understanding of gaming trends, I
-                    excel in collaborative environments where creativity
-                    thrives. I’m eager to contribute to exciting projects and
-                    continuously learn and adapt within the gaming industry.
-                    Let’s connect and bring innovative gaming ideas to life!
+                    Proficient in Unity and C#, with experience across mobile, PC, and WebGL,
+                    I focus on writing clean, reusable, and well-documented code to deliver
+                    high-quality, maintainable games. I have also worked as an outsourced developer
+                    with multinational clients, collaborating remotely with international teams
+                    and stakeholders to deliver production-ready features on schedule.
+                    <br />
+                    <br />
+                    My expertise includes performance optimization, debugging complex issues,
+                    and refining game architecture to improve development efficiency and gameplay
+                    fluidity. With a strong eye for detail and a solid understanding of modern
+                    gaming trends, I thrive in collaborative, fast-paced environments.
+                    <br />
+                    <br />
+                    I am always eager to learn, adapt, and contribute to innovative projects that
+                    push creative and technical boundaries. Let’s connect and bring impactful
+                    gaming ideas to life.
                   </p>
+
                   {/*<button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>*/}
                 </div>
               )}
